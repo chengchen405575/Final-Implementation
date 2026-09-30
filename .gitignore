@@ -1,0 +1,33 @@
+# MATLAB and Simulink generated files
+**/slprj/
+**/codegen/
+**/*_ert_rtw/
+**/*_grt_rtw/
+*.slxc
+*.mldatx
+*.autosave
+*.asv
+*~
+
+# Generated validation output and scripted backups
+validation_results/
+backups/
+
+# Local model snapshots and cross-release recovery copies
+*_before_*.slx
+*_interface_modified_*.slx
+*_27_09.slx
+*.slx.r20*
+
+# MATLAB crash dumps and temporary files
+matlab_crash_dump.*
+java.log.*
+*.tmp
+*.temp
+
+# OS and editor metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
