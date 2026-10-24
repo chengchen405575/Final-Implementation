@@ -4,6 +4,7 @@ DesPath = [CurrentPath '\Parameter'];
 SubsystemPath = [CurrentPath '\Subsystems']; 
 addpath(SubsystemPath);
 addpath(DesPath);
+addpath(fullfile(CurrentPath,'SDA','runtime'));
 cd(DesPath)
 
 FOC.DataType ='double' ; % fixpoint or double 
@@ -20,8 +21,8 @@ FOC_Scaling = scaleFOCStruct(FOC, "FOC", rules, FOC.DataType);
 cd(CurrentPath)
 slddPath = [CurrentPath '/FOC_params.sldd'];
 createFOC_SLDD('FOC_PROC_Kara', slddPath, FOC_Scaling);
-% createFOC_SLDD rebuilds the dictionary, so restore the SDA PL interfaces.
-defineSdaPlBuses(slddPath);
+% createFOC_SLDD rebuilds the dictionary, so restore the SDA interfaces.
+defineSdaBuses(slddPath);
 AltPWM = false;
 
 % For MPC

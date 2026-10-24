@@ -12,7 +12,7 @@ doubleVectorRestoreDir = onCleanup(@() cd(doubleVectorPreviousDir));
 doubleVectorParameterDir = 'Parameter';
 doubleVectorSubsystemDir = 'Subsystems_2025b';
 doubleVectorFunctionDir = 'functions';
-doubleVectorSdaFrameworkDir = 'SDA_Framework';
+doubleVectorSdaRuntimeDir = fullfile('SDA','runtime');
 doubleVectorModelFile = 'FCSMPC_double_vector_2025b.slx';
 doubleVectorModelName = 'FCSMPC_double_vector_2025b';
 doubleVectorDictionary = 'FOC_params.sldd';
@@ -26,15 +26,15 @@ assert(isfolder(doubleVectorParameterDir), ...
 assert(isfolder(doubleVectorSubsystemDir), ...
     'double_vector_ini:SubsystemFolderNotFound', ...
     'Subsystem folder not found: %s', doubleVectorSubsystemDir);
-assert(isfolder(doubleVectorSdaFrameworkDir), ...
-    'double_vector_ini:SdaFrameworkFolderNotFound', ...
-    'SDA framework folder not found: %s', doubleVectorSdaFrameworkDir);
+assert(isfolder(doubleVectorSdaRuntimeDir), ...
+    'double_vector_ini:SdaRuntimeFolderNotFound', ...
+    'SDA runtime folder not found: %s', doubleVectorSdaRuntimeDir);
 
 addpath('.');
 addpath(doubleVectorParameterDir);
 addpath(doubleVectorSubsystemDir);
 addpath(genpath(doubleVectorFunctionDir));
-addpath(doubleVectorSdaFrameworkDir);
+addpath(doubleVectorSdaRuntimeDir);
 
 % FOC_Ini initialization from ver_2. The ordering is intentional because
 % later scripts consume fields created earlier.
@@ -73,7 +73,7 @@ FCS_Parameter;
 % createFOC_SLDD removes the previous dictionary, so all Bus definitions
 % must be restored immediately afterwards and before either model is loaded.
 createFOC_SLDD(doubleVectorModelName, doubleVectorDictionary, FOC_Scaling);
-defineSdaPlBuses(doubleVectorDictionary);
+defineSdaBuses(doubleVectorDictionary);
 
 % Load PhaseShift explicitly from this version's Subsystems folder. The
 % relative path prevents another PhaseShift model on the MATLAB path from

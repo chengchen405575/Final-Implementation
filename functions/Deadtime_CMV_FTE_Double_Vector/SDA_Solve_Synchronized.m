@@ -1,7 +1,7 @@
 function [Jopt, nodes, optimal, Uopt, Uapply, ...
     predictionValidNext,iabcPredictedNext, ...
     leafNodes, bestCMVCost, cmvMetricRatio, switchCountApplied, ...
-    debug_lower, debug_upper, Jround, Jshift, solutionToggle] = ...
+    debug_lower, debug_upper, Jround, Jshift, Jbabai, solutionToggle] = ...
     SDA_Solve_Synchronized(H, U_unc, NmaxNod, UoptPrev, ...
     iabcCompensated, deltaIabcBase, deltaIabcSwitch, ...
     lambdaZero, lambdaDeadtime, deadtime_ratio, currentEpsMargin)
@@ -22,19 +22,47 @@ Uround = min(max(round(U_unc),0.0),1.0);
 Ushift = zeros(n,1);
 Ushift(1:n-nu) = UoptPrev(nu+1:n);
 Ushift(n-nu+1:n) = UoptPrev(n-nu+1:n);
+
+% Forward Babai nearest-plane point for the lower-triangular factor H.
+% This uses the same conditional centers and binary tie rule as the first
+% Schnorr--Euchner descent, but constructs a complete incumbent without
+% backtracking.
+Ubabai = zeros(n,1);
+for babaiLevel = 1:n
+    babaiHead = 0.0;
+    if babaiLevel > 1
+        babaiHead = H(babaiLevel,1:babaiLevel-1)* ...
+            Ubabai(1:babaiLevel-1);
+    end
+    babaiCenter = (Ubar(babaiLevel)-babaiHead)/ ...
+        H(babaiLevel,babaiLevel);
+    if babaiCenter <= 0.5
+        Ubabai(babaiLevel) = 0.0;
+    else
+        Ubabai(babaiLevel) = 1.0;
+    end
+end
+
 Jround = norm(H*(Uround-U_unc),2)^2;
 Jshift = norm(H*(Ushift-U_unc),2)^2;
-if Jshift < Jround
+Jbabai = norm(H*(Ubabai-U_unc),2)^2;
+
+Uini = Uround;
+Jini = Jround;
+if Jshift < Jini
     Uini = Ushift;
-else
-    Uini = Uround;
+    Jini = Jshift;
+end
+if Jbabai < Jini
+    Uini = Ubabai;
+    Jini = Jbabai;
 end
 
 bestCMVCost = sequence_cmv_cost_predicted( ...
     Uini,uprev,iabcCompensated,Np,nu, ...
     deltaIabcBase,deltaIabcSwitch,lambdaZero,lambdaDeadtime, ...
     deadtimeRatio,currentEpsMargin);
-bestMetric = norm(H*(Uini-U_unc),2)^2+bestCMVCost;
+bestMetric = Jini+bestCMVCost;
 Uopt = Uini;
 
 U = zeros(n,1);
