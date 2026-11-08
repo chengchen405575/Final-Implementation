@@ -3,6 +3,11 @@
 This directory replays the SDA independently from Simulink. It is deliberately
 separate from the production controller.
 
+The recommended concise thesis-facing report is
+`analyze/Hybrid_SDA_Core_Argument.tex`.  The longer
+`analyze/Embedded_Zero_Vector_Penalty_SDA_Search_Analysis.tex` is retained as a
+detailed analysis archive containing exploratory diagnostics.
+
 ## Files
 
 - `extract_embedded_H_cases.m`: extracts every run and every transaction from
@@ -27,6 +32,8 @@ separate from the production controller.
   embedded, hybrid, and two oracle configurations.
 - `plot_hybrid_ablation_results.m`: regenerates the ablation figures from the
   saved results without rerunning the search.
+- `analyze_H_factor_distribution.m`: compares row norms, diagonal magnitudes,
+  normalized prefix coupling, and their correlation with oracle node counts.
 - `run_analysis.m`: example entry point.
 
 ## Recommended workflow

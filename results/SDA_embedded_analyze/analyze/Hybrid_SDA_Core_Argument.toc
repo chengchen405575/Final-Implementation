@@ -1,0 +1,16 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}Research Question and Claim}{1}{chapter.1}%
+\contentsline {paragraph}{\nonumberline Terminology.}{1}{paragraph*.2}%
+\contentsline {chapter}{\numberline {2}Claim 1: Complete-Sequence Equivalence}{2}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Claim 2: Embedded Initialization Provides a Better Upper Bound}{4}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Claim 3: Explicit Search Certifies Optimality More Efficiently}{6}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Secondary analysis of the Cholesky-factor distribution}{7}{section.4.1}%
+\contentsline {chapter}{\numberline {5}Hybrid Algorithm and Correctness}{10}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Controlled Ablation Result}{11}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Dataset, pairing, and sample selection}{11}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Meaning of the five configurations}{11}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Replay validation}{13}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Closed-Loop Deployment Validation}{15}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Time-domain overview}{15}{section.7.1}%
+\contentsline {chapter}{\numberline {8}Conclusion and Scope}{20}{chapter.8}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

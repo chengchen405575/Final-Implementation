@@ -12,6 +12,7 @@
 # Large, reproducible simulation and analysis datasets
 Harness/sda_dataset_*.mat
 SDA_embedded_analyze/data/embedded_H_*_*.mat
+results/SDA_embedded_analyze/data/embedded_H_*_*.mat
 
 # Generated validation output and scripted backups
 validation_results/
